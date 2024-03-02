@@ -1,1 +1,2 @@
 # Canvas
+🎨what is art?
