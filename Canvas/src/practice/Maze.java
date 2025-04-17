@@ -43,22 +43,21 @@ public class Maze {
 
 	private int findMaxRecMemo(int m, int n) {
 		count++;
-		if(memo[m][n]!=-1) {
-			return memo[m][n];
-		}
-		if(m==0&&n==0) {return maze[0][0];}
-		else if(m==0) memo[m][n] = maze[m][n] + findMaxRecMemo(m, n-1);
-		else if(n==0) memo[m][n] = maze[m][n] + findMaxRecMemo(m-1, n);
-		else memo[m][n] = maze[m][n] + Math.max(findMaxRecMemo(m, n-1), findMaxRecMemo(m-1, m));
+		if(memo[m][n]!=-1) return memo[m][n];
+		if(m==0&&n==0)return maze[0][0];
+		else if(m==0) return maze[m][n] + findMaxRecMemo(m, n-1);
+		else if(n==0) return maze[m][n] + findMaxRecMemo(m-1, n);
+		else memo[m][n] = maze[m][n]+Math.max(findMaxRecMemo(m, n-1),findMaxRecMemo(m-1, n));
 		return memo[m][n];
+		
 	}
 
 	private int findMaxRec(int m, int n) {
-		count++; 
+		count++;
 		if(m==0&&n==0)return maze[0][0];
-		else if(m==0)return maze[m][n]+findMaxRec(m, n-1);
-		else if(n==0)return maze[m][n]+findMaxRec(m-1,n);
-		else return maze[m][n] + Math.max(findMaxRec(m, n-1), findMaxRec(m-1, n)); 
+		else if(m==0)return maze[m][n] + maze[m][n-1];
+		else if(n==0)return maze[m][n] + maze[m-1][n];
+		else return maze[m][n] + Math.max(findMaxRec(m, n-1), findMaxRec(m-1,n));
 	}
 
 	public int findMaxIter(int m, int n) {
@@ -66,19 +65,19 @@ public class Maze {
 		temp[0][0] = maze[0][0];
 		for(int i=1;i<=m;i++) {
 			count++;
-			temp[i][0] = temp[i-1][0] + maze[i][0];
+			temp[i][0] = maze[i][n] + temp[i-1][0];
 		}
-		for(int j=1;j<=n;j++) {
+		for(int i=1;i<=n;i++) {
 			count++;
-			temp[0][j] = temp[0][j-1]+maze[0][j];
+			temp[0][i] = maze[m][i] + temp[0][i-1];
 		}
 		for(int i=1;i<=m;i++) {
 			for(int j=1;j<=n;j++) {
 				count++;
-				temp[i][j] = Math.max(temp[i-1][j],temp[i][j-1])+maze[i][j];
+				temp[i][j] = maze[i][j] + Math.max(temp[i-1][j], temp[i][j-1]);
 			}
 		}
-		showMatrix("Iteration Result : ",temp );
+		showMatrix("Iteration Result : ", temp);
 		return temp[m][n];
 	}
 
