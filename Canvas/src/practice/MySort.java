@@ -1,8 +1,51 @@
 package practice;
-
 import java.util.Arrays;
 
 public class MySort {
+	
+	public int[] quickSort(int[] data) {
+	    return quickSort(data, 0, data.length - 1);
+	}
+
+	private int[] quickSort(int[] data, int p, int r) {  // overloading   cf. overriding
+	    if (p < r) {
+	        int q = partition(data, p, r);
+	        quickSort(data, p, q - 1);
+	        quickSort(data, q + 1, r);
+	    }
+	    return data;
+	}
+
+	private int partition(int[] data, int p, int r) {
+//	    int pivot = r;
+//	    int left = p;
+//	    int right = r;
+//
+//	    while (left < right) {
+//	        while (data[left] < data[pivot])
+//	            left++;
+//	        while (right > left && data[right] >= data[pivot])
+//	            right--;
+//	        if (left < right)
+//	            swap(data, left, right);
+//	    }
+//
+//	    swap(data, left, pivot);
+//	    return left;
+		
+	    int x = data[r];       
+	    int k = p - 1;   
+
+	    for (int i = p; i < r; i++) {
+	        if (data[i] <= x) {
+	            swap(data, ++k, i);
+	        }
+	    }
+
+	    swap(data, k + 1, r);   
+	    return k + 1;      
+	}
+	
 	
 	public int[] selectionSort(int[] data) {
 //		int n = data.length;
@@ -76,6 +119,50 @@ public class MySort {
 		return data;
 	}
 	
+	public int[] mergeSort(int[] data) {
+	    return mergeSort(data, 0, data.length - 1);
+	}
+
+	private int[] mergeSort(int[] data, int p, int r) {
+	    if (p < r) {
+	        int q = (p + r) / 2;
+	        mergeSort(data, p, q);
+	        mergeSort(data, q + 1, r);
+	        merge(data, p, q, r);
+	    }
+	    return data;
+	}
+	
+	private int[] merge(int[] data, int p, int q, int r) {
+	    int[] temp = new int[data.length];
+
+	    int i = p;
+	    int j = q + 1;
+	    int k = p;
+
+	    while (i <= q && j <= r) {
+	        if (data[i] < data[j])
+	            temp[k++] = data[i++];
+	        else
+	            temp[k++] = data[j++];
+	    }
+
+	    while (i <= q) {
+	        temp[k++] = data[i++];
+	    }
+
+	    while (j <= r) {
+	        temp[k++] = data[j++];
+	    }
+
+	    for (int l = p; l <= r; l++) {
+	        data[l] = temp[l];
+	    }
+
+	    return data;
+	}
+
+
 	public static void main(String[] args) {
 		int [] data = {113,  336,  74,  71,  86,  176,  313,  80,  225,  342,
 				  170,  292,  275,  266 , 79,  16,  109,  175 , 245,  156,
@@ -131,10 +218,15 @@ public class MySort {
 //		MySort ms = new MySort();
 //		int [] dataSorted = new int[data.length];
 //		
-//		System.out.println("\n< ---- Sort >");
-//		dataSorted=data.clone();
-//		ms.----Sort(dataSorted);
-//		showData(dataSorted);
+		System.out.println("\n< Quick Sort >");
+		toBeSorted=data.clone();
+		ms.quickSort(toBeSorted);
+		showData(toBeSorted);
+		
+		System.out.println("\n< Merge Sort >");
+		toBeSorted=data.clone();
+		ms.quickSort(toBeSorted);
+		showData(toBeSorted);
 		
 	}
 	private static void showData(int[] data) {
