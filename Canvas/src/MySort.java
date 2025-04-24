@@ -14,7 +14,59 @@ public class MySort {
 	    }
 	    return data;
 	}
+	//스택
+//	public int[] quickSortIter(int[] data) {
+//	    Stack<int[]> stack = new Stack<>();
+//	    stack.push(new int[] {0, data.length - 1});
+//
+//	    while (!stack.isEmpty()) {
+//	        int[] range = stack.pop();
+//	        int p = range[0];
+//	        int r = range[1];
+//
+//	        if (p < r) {
+//	            int q = partition(data, p, r);
+//	            stack.push(new int[] {p, q - 1});
+//	            stack.push(new int[] {q + 1, r});
+//	        }
+//	    }
+//
+//	    return data;
+//	}	
 
+	
+	// 노스택
+//	public int[] quickSortIterNoStack(int[] data) {
+//	    int start = 0;
+//	    int end = data.length - 1;
+//
+//	    while (true) {
+//	        // 정렬할 범위가 유효하지 않으면 종료
+//	        if (start >= end) break;
+//
+//	        int pivotIndex = partition(data, start, end);
+//
+//	        // 왼쪽 먼저 다 정렬하고, 그 다음 오른쪽을 다시 start~end로 반복
+//	        // 이 과정을 통해 오른쪽 파티션을 sort할 때는 while로 다시 반복
+//	        // 왼쪽은 그냥 반복 안에서 한 번만 처리됨
+//
+//	        // 왼쪽 처리 (start ~ pivotIndex-1)
+//	        if (pivotIndex - 1 > start) {
+//	            int leftEnd = pivotIndex - 1;
+//	            while (start < leftEnd) {
+//	                int midPivot = partition(data, start, leftEnd);
+//	                leftEnd = midPivot - 1;
+//	            }
+//	        }
+//
+//	        // 오른쪽으로 범위 이동
+//	        start = pivotIndex + 1;
+//	    }
+//
+//	    return data;
+//	}
+
+	
 	private int partition(int[] data, int p, int r) {
 //	    int pivot = r;
 //	    int left = p;
@@ -107,6 +159,28 @@ public class MySort {
 		}
 		return data;
 	}
+//	
+//	public int[] insertionSortRec(int[] data) {
+//	    return insertionSortRec(data, 1);
+//	}
+//
+//	private int[] insertionSortRec(int[] data, int i) {
+//	    if (i >= data.length) return data;
+//
+//	    int value = data[i];
+//	    int j = i - 1;
+//
+//	    while (j >= 0 && data[j] > value) {
+//	        data[j + 1] = data[j];
+//	        j--;
+//	    }
+//
+//	    data[j + 1] = value;
+//
+//	    return insertionSortRec(data, i + 1);
+//	}
+	
+	
 	
 	public int[] bubbleSort(int[] data) {
 		int n = data.length;
@@ -117,6 +191,23 @@ public class MySort {
 		}
 		return data;
 	}
+	
+//	public int[] bubbleSortRec(int[] data) {
+//	    return bubbleSortRec(data, data.length);
+//	}
+//
+//	private int[] bubbleSortRec(int[] data, int n) {
+//	    if (n == 1) return data;
+//
+//	    for (int i = 0; i < n - 1; i++) {
+//	        if (data[i] > data[i + 1]) {
+//	            swap(data, i, i + 1);
+//	        }
+//	    }
+//
+//	    return bubbleSortRec(data, n - 1);
+//	}
+
 	
 	public int[] mergeSort(int[] data) {
 	    return mergeSort(data, 0, data.length - 1);
@@ -160,6 +251,29 @@ public class MySort {
 
 	    return data;
 	}
+	
+//    public int[] mergeSortIter(int[] data) {
+//        int n = data.length;
+//        int[] tmp = new int[n];
+//
+//        // width: 현재 병합할 블록의 크기 (1, 2, 4, 8, …)
+//        for (int width = 1; width < n; width *= 2) {
+//            for (int left = 0; left < n; left += 2 * width) {
+//                int mid = Math.min(left + width - 1, n - 1);
+//                int right = Math.min(left + 2 * width - 1, n - 1);
+//                // [left..mid] 와 [mid+1..right]를 병합
+//                int i = left, j = mid + 1, k = left;
+//                while (i <= mid && j <= right) {
+//                    tmp[k++] = (data[i] <= data[j]) ? data[i++] : data[j++];
+//                }
+//                while (i <= mid) tmp[k++] = data[i++];
+//                while (j <= right) tmp[k++] = data[j++];
+//            }
+//            // 한 단계 병합이 끝나면 tmp 전체를 data로 복사
+//            System.arraycopy(tmp, 0, data, 0, n);
+//        }
+//        return data;
+//    }
 
 
 	public static void main(String[] args) {
