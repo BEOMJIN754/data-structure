@@ -169,4 +169,61 @@ public class MyArrayList2<T> {
 		System.out.println(toString());
 		System.out.println(">>> Current Capacity ="+capacity+" Size = "+size);
 	}
+	
+	
+//  public static void main(String[] args) {
+//      // MyArrayList1 객체를 담는 리스트 하나 생성
+//      MyArrayList1 list1 = new MyArrayList1();
+//      list1.add(10);
+//      list1.add(20);
+//      list1.add(30);
+//
+//      // 또 다른 MyArrayList1 객체 생성
+//      MyArrayList1 list2 = new MyArrayList1();
+//      list2.add(100);
+//      list2.add(200);
+//
+//      // 이제 이 두 리스트를 MyArrayList2에 담아보자 (리스트 안에 리스트)
+//      MyArrayList2<MyArrayList1> bigList = new MyArrayList2<>();
+//
+//      bigList.add(list1);
+//      bigList.add(list2);
+//
+//      // 중첩 리스트 출력
+//      System.out.println("=== 중첩된 리스트 출력 ===");
+//      for (int i = 0; i < bigList.size(); i++) {
+//          System.out.println("리스트 " + i + ": " + bigList.get(i));
+//      }
+//
+//      // 예시: 리스트1의 두 번째 값 가져오기
+//      int value = (int) bigList.get(0).get(1); // list1의 두 번째 요소
+//      System.out.println("\n리스트0의 인덱스1 값: " + value);
+//  }
+	
+	 // 스택들을 저장할 리스트 생성
+//    ArrayList<Stack<Integer>> stackList = new ArrayList<>();
+//
+//    // 첫 번째 스택 생성 및 추가
+//    Stack<Integer> stack1 = new Stack<>();
+//    stack1.push(10);
+//    stack1.push(20);
+//    stack1.push(30);
+//    stackList.add(stack1);
+//
+//    // 두 번째 스택 생성 및 추가
+//    Stack<Integer> stack2 = new Stack<>();
+//    stack2.push(100);
+//    stack2.push(200);
+//    stackList.add(stack2);
+//
+//    // 리스트 안의 스택들 출력
+//    System.out.println("=== 스택 목록 출력 ===");
+//    for (int i = 0; i < stackList.size(); i++) {
+//        System.out.println("스택 " + i + ": " + stackList.get(i));
+//    }
+//
+//    // 특정 스택에서 값 꺼내보기
+//    int value = stackList.get(0).peek(); // 첫 번째 스택의 top 값
+//    System.out.println("\n첫 번째 스택의 top 값: " + value);
+//}
 }

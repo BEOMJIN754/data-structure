@@ -5,8 +5,8 @@ public class MyData {
 	String name;
 	
 	public MyData(int n, String s) {
-		n =n;
-		name =s;
+		this.n =n;
+		this.name =s;
 	}
 	
 	public String toString() {
@@ -16,4 +16,12 @@ public class MyData {
 	public boolean equals(Object that) {
 		return (this.n==((MyData)that).n);
 	}
+	
+//	@Override
+//	public boolean equals(Object obj) {
+//		if (this == obj) return true;
+//		if (obj == null || getClass() != obj.getClass()) return false;
+//		MyData other = (MyData) obj;
+//		return this.n == other.n;
+//	}
 }

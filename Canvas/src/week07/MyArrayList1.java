@@ -171,4 +171,5 @@ public class MyArrayList1 implements MyList {
 		System.out.println(toString());
 		System.out.println(">>> Current Capacity ="+capacity+" Size = "+size);
 	}
+
 }
