@@ -1,3 +1,5 @@
+package week10;
+
 public class MyLinkedList1 {
 	class Node {
 		String data;
@@ -196,4 +198,37 @@ public class MyLinkedList1 {
 		}
 		return str.trim();
 	}
+	
+	public static void main(String[] args) {
+	    String[] data = {
+	        "Lee", "Kim", "Park", "Choi", "Jung", "Kang", "Yoon", "Lim", "Han", "Shin",
+	        "Jo", "Jang", "Oh", "Hwang", "Ahn", "Seo", "Moon", "Yang", "Hong", "Do"
+	    };
+
+	    MyLinkedList1 list = new MyLinkedList1();
+
+	    for (int i = 0; i < 4; i++)
+	        list.add(data[i]);
+	    System.out.println("Initial: " + list.toString());
+
+	    for (int i = 4; i < 10; i++)
+	        list.add(data[i]);
+	    System.out.println("After adding more: " + list.toString());
+
+	    list.remove("Park");
+	    System.out.println("After removing 'Park': " + list.toString());
+
+	    list.remove("Kim");
+	    System.out.println("After removing 'Kim': " + list.toString());
+
+	    list.add(3, "Baek");
+	    System.out.println("After inserting 'Baek' at index 3: " + list.toString());
+
+	    list.add(list.size(), "Nam");
+	    System.out.println("After appending 'Nam': " + list.toString());
+
+	    list.clear();
+	    System.out.println("After clearing the list: " + list.toString());
+	}
+
 }
