@@ -162,6 +162,27 @@ public class MyLinkedList0 {
 		return ret;
 	}
 	
+	public int remove(Object value) {
+		if(head!=null) {
+			if(head.data==(int)value) {
+				return removeFirst();
+			}
+			else {
+				Node p = head;
+				Node q = p.next;
+				while(q!=null) {
+					if(q.data==(int)value) {
+						p.next=q.next;
+						return q.data;
+					}
+					p=q;
+					q=p.next;
+				}
+			}
+		}
+		return -9999;
+	}
+	
 	private int removeFirst() {
 		int ret = -999;
 		if(head!=null) {

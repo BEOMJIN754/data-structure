@@ -156,7 +156,7 @@ public class MyLinkedList1 {
 		String val = (String) value;
 
 		if (head != null) {
-			if (head.data.equals(val)) {
+			if (head.data.equals(val)) { // ==> equals, <> -> compareTo
 				return removeFirst();
 			} else {
 				Node p = head;
@@ -209,26 +209,23 @@ public class MyLinkedList1 {
 
 	    for (int i = 0; i < 4; i++)
 	        list.add(data[i]);
-	    System.out.println("Initial: " + list.toString());
+	    System.out.println(list.toString());
 
 	    for (int i = 4; i < 10; i++)
 	        list.add(data[i]);
-	    System.out.println("After adding more: " + list.toString());
+	    System.out.println(list.toString());
 
 	    list.remove("Park");
-	    System.out.println("After removing 'Park': " + list.toString());
-
 	    list.remove("Kim");
-	    System.out.println("After removing 'Kim': " + list.toString());
 
 	    list.add(3, "Baek");
-	    System.out.println("After inserting 'Baek' at index 3: " + list.toString());
-
 	    list.add(list.size(), "Nam");
-	    System.out.println("After appending 'Nam': " + list.toString());
+
+	    System.out.println(list.toString());
 
 	    list.clear();
-	    System.out.println("After clearing the list: " + list.toString());
+	    System.out.println(list.toString());
 	}
+
 
 }
