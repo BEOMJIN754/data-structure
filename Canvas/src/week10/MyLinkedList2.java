@@ -1,151 +1,223 @@
 package week10;
 
 
-public class MyLinkedList2<T> {
-    class Node {
-        T data;
-        Node next;
 
-        Node(T d) {
-            data = d;
-            next = null;
-        }
-
-        public String toString() {
-            return data.toString();
-        }
-    }
-
-    private Node head;
-    private int size;
-
-    public MyLinkedList2() {
-        head = null;
-        size = 0;
-    }
-
-    public boolean isEmpty() {
-        return head == null;
-    }
-
-    public void add(T value) {
-        add(size, value); // default to addLast
-    }
-
-    public void add(int index, T value) {
-        if (index < 0 || index > size) {
-            System.out.println("❌ Invalid index: " + index);
-            return;
-        }
-
-        Node newNode = new Node(value);
-        if (index == 0) {
-            newNode.next = head;
-            head = newNode;
-        } else {
-            Node p = head;
-            for (int i = 0; i < index - 1; i++) {
-                p = p.next;
-            }
-            newNode.next = p.next;
-            p.next = newNode;
-        }
-        size++;
-    }
-
-    public T get(int idx) {
-        if (idx < 0 || idx >= size) return null;
-        Node p = head;
-        for (int i = 0; i < idx; i++) {
-            p = p.next;
-        }
-        return p.data;
-    }
-
-    public int size() {
-        return size;
-    }
-
-    public boolean contains(T value) {
-        return indexOf(value) != -1;
-    }
-
-    public int indexOf(T value) {
-        Node p = head;
-        int index = 0;
-        while (p != null) {
-            if (p.data.equals(value)) return index;
-            p = p.next;
-            index++;
-        }
-        return -1;
-    }
-
-    public T remove(int idx) {
-        if (idx < 0 || idx >= size) return null;
-
-        T ret;
-        if (idx == 0) {
-            ret = head.data;
-            head = head.next;
-        } else {
-            Node p = head;
-            for (int i = 0; i < idx - 1; i++) {
-                p = p.next;
-            }
-            ret = p.next.data;
-            p.next = p.next.next;
-        }
-        size--;
-        return ret;
-    }
-
-    public T remove(Object value) {
-        if (head == null) return null;
-
-        if (head.data.equals(value)) {
-            T ret = head.data;
-            head = head.next;
-            size--;
-            return ret;
-        }
-
-        Node p = head;
-        while (p.next != null) {
-            if (p.next.data.equals(value)) {
-                T ret = p.next.data;
-                p.next = p.next.next;
-                size--;
-                return ret;
-            }
-            p = p.next;
-        }
-
-        return null;
-    }
-
-    public void clear() {
-        head = null;
-        size = 0;
-    }
-
-    public void showList() {
-        System.out.println(this);
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        Node p = head;
-        while (p != null) {
-            sb.append(p.data).append("\n");
-            p = p.next;
-        }
-        return sb.toString().trim();
-    }
-
-
+public class MyLinkedList2<T> {		
+		private class Node{
+			T data;
+			Node next;
+			
+			Node(T d){
+				data=d;
+				next=null;
+			}
+			
+			public String toString() {
+				return ""+data.toString();
+			}
+			
+		}
 		
+		Node head;
+		int size;
+		
+		public MyLinkedList2() {
+			head=null;
+			size=0;
+		}
+		
+		public boolean isEmpty() {
+			return (head==null);
+		}
+		
+		public void add(T value) {
+			addFirst(value);
+//			addLast(value);
+		}
+		
+		
+		private void addFirst(T value) {
+			Node newNode=new Node(value);
+			newNode.next=head;
+			head = newNode;
+			size++;
+		}
+		
+		private void addLast(T value) {
+			if (isEmpty())
+				addFirst(value);
+			else {
+				Node newNode=new Node(value);
+				Node p=head;
+				while(p.next!=null) {
+					p=p.next;
+				}
+				p.next=newNode;
+				size++;
+			}
+		}
+		
+		public int indexOf(T value) {
+			int index =0;
+			Node  p=head;
+			while(p!=null) {
+				if (p.data.equals(value))
+					return index;
+				else {
+					index++;
+					p=p.next;
+				}
+			}
+			return -1;
+		}
+		
+		public void add(int index, T value) {  // 0<= index  <= size()
+			if (checkIndexRange(index)) {  // 0<= index  < size()
+				if (index==0)
+					addFirst(value);
+				else {
+					Node newNode= new Node(value);
+					int i=1;
+					Node p=head;  //  p!=null !!!
+					while(p.next !=null) {
+						if (i==index) {
+							newNode.next=p.next;
+							p.next=newNode;
+							size++;
+							return;
+						}
+						else {
+							i++;
+							p=p.next;
+						}
+					}
+				}
+			}
+			else if (index==size())	
+				addLast(value);
+		}
+
+		public int size() {
+//			int n=0;
+//			Node p=head;
+//			while(p!=null) {
+//				n++;
+//				p=p.next;
+//			}
+//			return n;
+			return size;
+		}
+
+		public void clear() {
+			head=null;
+		}
+		
+		public boolean contains(T value) {
+			return (indexOf(value)!=-1);
+		}
+		
+		public T get(int index) {
+			int i=0;
+			Node p=head;
+			while( p !=null) {
+				if (i==index) {
+					return p.data;
+				}
+				i++;
+				p=p.next;
+			}
+			return null; // null
+		}
+		
+		public void set(int index, T value) {
+			int i=0;
+			Node p=head;
+			while( p !=null) {
+				if (i==index) {
+					p.data=value;
+				}
+				i++;
+				p=p.next;
+			}
+			//  error message!
+		}
+		
+		public T remove(int index) {  // return the value removed
+			T ret = null;
+			if (checkIndexRange(index)) {
+				if (index==0) {
+					ret =removeFirst();
+				}
+				else {
+					int i=1;
+					Node p=head;
+					Node q=p.next;
+					while( q !=null) {
+						if (i==index) {
+							ret=q.data;
+							p.next=q.next;
+							size--;
+							break;
+						}
+						i++;
+						p=q;
+						q=q.next;
+					}
+				}
+			}
+			return ret;
+		}
+
+		public T remove(T value) {
+			if (head!=null) {
+				if (head.data==value)
+					return removeFirst();
+				else {
+					Node p=head;
+					Node q=p.next;
+					while(q!=null) {
+						if (q.data.equals(value)) { //  == -> equals, <> -> compareTo(..)
+							p.next=q.next;
+							size--;
+							return q.data;
+						}
+						p=q;
+						q=q.next;
+					}
+				}
+			}
+			return null;
+		}
+		
+		private T removeFirst() {
+			T ret = null;
+			if (head!=null) {
+				ret = head.data;
+				head = head.next;
+				size--;
+			}
+			return ret;
+		}
+
+		private boolean checkIndexRange(int index) {
+			if (index>=0 && index<size())
+				return true;
+			else return false;
+		}
+		
+		public String toString() {
+			String str="";
+			Node p=head;
+			while(p!=null) {
+				str=str+p.data.toString()+"  ";
+				p=p.next;
+			}
+			return str;
+		}
+		public void  showList() {
+			System.out.println(toString());
+		}
+			
 		public static void main(String[] args) {
 			
 //			String [] data = {"kim","lee","park","choi","jung","kang","cho","yoon","jang"};
@@ -168,7 +240,7 @@ public class MyLinkedList2<T> {
 			list.add(list.size(),new MyData(12, "oh"));
 			list.showList();
 
-			System.out.println(list.indexOf(new MyData(2, "lee")));
+			System.out.println(">>>  "+ list.indexOf(new MyData(2, "lee")));
 
 			System.out.println(list.remove(0));
 			list.showList();
@@ -185,5 +257,3 @@ public class MyLinkedList2<T> {
 		}
 
 	}
-
-
