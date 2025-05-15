@@ -1,7 +1,5 @@
 package week10;
 
-
-
 public class MyLinkedList2<T> {		
 		private class Node{
 			T data;
