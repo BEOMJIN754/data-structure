@@ -32,7 +32,14 @@ public class MLLNew<T> {
 	}
 
 	public int size() {
-		return size;
+		return size(head);
+	}
+
+	private int size(Node p) {
+		if(p==null) {
+			return 0;
+		}
+		else return 1+size(head.next);
 	}
 
 	public void clear() {
