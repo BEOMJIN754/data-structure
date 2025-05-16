@@ -44,7 +44,7 @@ public class MLLNew<T> {
 		addLast(value);
 	}
 
-	private void addFirst(T value) {
+	public void addFirst(T value) {
 		Node newNode = new Node(value);
 		if (isEmpty()) {
 			head = tail = newNode;
@@ -56,7 +56,7 @@ public class MLLNew<T> {
 		size++;
 	}
 
-	private void addLast(T value) {
+	public void addLast(T value) {
 		Node newNode = new Node(value);
 		if (isEmpty()) {
 			head = tail = newNode;
@@ -129,80 +129,60 @@ public class MLLNew<T> {
 	}
 
 	public T remove(int idx) {
-		T ret = null;
-		if (checkIndexRange(idx)) {
-			if (idx == 0) {
-				return removeFirst();
-			} else if (idx == size - 1) {
-				return removeLast();
-			} else {
-				Node p = head;
-				for (int i = 0; i < idx; i++) {
-					p = p.next;
-				}
-				ret = p.data;
-				p.next.prev = p.prev;
-				p.prev.next = p.next;
-				size--;
-			}
-		}
-		return ret;
+	    if (!checkIndexRange(idx)) {
+	        return null;
+	    }
+	    Node p = head;
+	    for (int i = 0; i < idx; i++) {
+	        p = p.next;
+	    }
+	    return removeANode(p);
 	}
+		
 
 	private boolean checkIndexRange(int idx) {
 		return idx >= 0 && idx < size;
 	}
-
-	private T removeFirst() {
-		if (isEmpty())
-			return null;
-		T ret = head.data;
-		if (head == tail) {
-			head = tail = null;
-		} else {
-			head = head.next;
-			head.prev = null;
+	
+	private T removeANode(Node p) { //p!=null
+		T ret = p.data;
+		
+		if(p.prev==null) {
+			head=p.next;
 		}
+		else p.prev.next = p.next;
+		
+		if(p.next==null) tail=p.prev;
+		else p.next.prev=p.prev;
+		
 		size--;
 		return ret;
+	}
+
+	private T removeFirst() {
+		if(head!=null) {
+			return removeANode(head);
+		}
+		else return null;
 	}
 
 	private T removeLast() {
-		if (isEmpty())
-			return null;
-		T ret = tail.data;
-		if (head == tail) {
-			head = tail = null;
-		} else {
-			tail = tail.prev;
-			tail.next = null;
+		if(tail!=null) {
+			return removeANode(tail);
 		}
-		size--;
-		return ret;
+		else return null;
 	}
 	
-	public T remove(T value) {
-		if(head!=null) {
-			if(head.data==value) {
-				return removeFirst();
+	public boolean remove(T value) {
+		Node p = head;
+		while(p!=null) {
+			if(p.data.equals(value)) {
+				removeANode(p);
+				return true;}
+			else p=p.next;
 			}
-			else if(tail.data==null)return removeLast();
-			else {
-				Node p = head.next;
-				while(p!=null) {
-					if(p.data.equals(value)) {
-						T ret = p.data;
-						p.next.prev =p.prev;
-						p.prev.next=p.next;
-						size--;
-						return ret;
-					}
-				p=p.next;
-				}
-			}
+		return false;
 		}
-		return null;
-	}
 
 //	public boolean remove(T value) {
 //		Node p = head;
