@@ -1,6 +1,6 @@
-package week10;
+package week11;
 
-public class MyLinkedList<T> {
+public class MLLNew<T> {
 	private class Node {
 		T data;
 		Node prev;
@@ -21,7 +21,7 @@ public class MyLinkedList<T> {
 	Node tail;
 	int size;
 
-	public MyLinkedList() {
+	public MLLNew() {
 		head = null;
 		tail = null;
 		size = 0;
@@ -242,7 +242,7 @@ public class MyLinkedList<T> {
 
 		Object[][] data2 = { { 1, "kim" }, { 2, "lee" }, { 3, "park" }, { 4, "choi" }, { 5, "jung" }, { 6, "kang" },
 				{ 7, "cho" }, { 8, "yoon" }, { 9, "jang" } };
-		MyLinkedList<MyData> list2 = new MyLinkedList<>();
+		MLLNew<MyData> list2 = new MLLNew<>();
 		for (int i = 0; i < data2.length; i++) {
 			list2.add(new MyData((int) data2[i][0], (String) data2[i][1]));
 			list2.showList();
