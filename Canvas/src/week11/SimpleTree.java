@@ -13,42 +13,67 @@ public class SimpleTree {
 				right=null;
 			}
 			
+			Node(Node lc,char d,Node rc){
+				data=d;
+				left=lc;
+				right=rc;
+			}
+			
 			public String toString() {
 				return ""+data;
 			}
 		}
 		
-	
+		Node root;
+		char[] array;
 		SimpleTree(){
-			
+			root = null;
+			array = new char[20];
 		}
 		
 		public Node makeTree(char ch) {
-
-
+			root  =new Node(ch);
+			return root;
 		}
 		public Node makeTree(SimpleTree leftSubtree, char ch, SimpleTree rightSubtree) {
-
+//			root = new Node(ch);
+//			root.left = leftSubtree.root;
+//			root.right = rightSubtree.root;
+			
+			root = new Node(leftSubtree.root,ch,rightSubtree.root);
+			return root;
 
 		}
 		
 		public void showTree() {
-
-
+			System.out.println("\n<Tree in Nodes>");
+			showTree(root);
+			System.out.println();
 		}
 		
 		private void showTree(Node p) {
-
-
-		
-		
-		
+			if(p!=null) {
+				showTree(p.left);
+				System.out.print(p.data);
+				showTree(p.right);
+			}
 		}
 		
-		public char[] toArray() {
-	
-			
-			return null;
+		public void toArray() {
+			toArray(root,1);
+			System.out.println("\n<Tree in Array>");
+			for(int i=1;i<=7;i++) {
+				System.out.print(array[i]+" ");
+			}
+			System.out.println();
+		}
+
+		private void toArray(Node root2, int i) {
+			if(root2!=null) {
+				array[i]=root2.data;
+				toArray(root2.left,i*2);
+				toArray(root2.right,i*2+1);
+			}
 		}
 
 		public int getNodeCount() {
@@ -58,9 +83,12 @@ public class SimpleTree {
 		}
 		
 		public int getHeight() {
+			return getHeight(root);
+		}
 
-		
-			return 0;
+		private int getHeight(Node p) {
+			if(p==null)return 0;
+			else return 1+Math.max(getHeight(p.left),getHeight(p.right));
 		}
 
 		public boolean contains(char d) {
