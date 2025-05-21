@@ -76,12 +76,17 @@ public class SimpleTree {
 			}
 		}
 
-		public int getNodeCount() {
-
-			
-			return 0;
-		}
+	    public int getNodeCount() {
+	        return countNodes(root);
+	    }
 		
+	    private int countNodes(Node p) {
+	        if (p == null) return 0;
+	        return 1
+	             + countNodes(p.left)
+	             + countNodes(p.right);
+	    }
+	    
 		public int getHeight() {
 			return getHeight(root);
 		}
@@ -91,11 +96,16 @@ public class SimpleTree {
 			else return 1+Math.max(getHeight(p.left),getHeight(p.right));
 		}
 
-		public boolean contains(char d) {
-
-
-			return true;
-		}
+	    public boolean contains(char d) {
+	        return containsNode(root, d);
+	    }
+	    private boolean containsNode(Node p, char d) {
+	        if (p == null)       return false;
+	        if (p.data == d)     return true;
+	        // 왼쪽 또는 오른쪽 서브트리에서 찾기
+	        return containsNode(p.left, d)
+	            || containsNode(p.right, d);
+	    }
 
 		public static void main(String[] args) {
 			// a*b+c%d
