@@ -1,7 +1,7 @@
 package week12;
 
 
-public class BinarySearchTree {
+public class BinarySearchTree2 {
 
 	class Node {
 		int key;
@@ -20,7 +20,7 @@ public class BinarySearchTree {
 	
 	Node root;
 	
-	public BinarySearchTree() {
+	public BinarySearchTree2() {
 		root=null;
 	}
 	
@@ -103,37 +103,43 @@ public class BinarySearchTree {
 	}
 
 	private Node deleteANode(Node node) {
-		//case1 : no child
-		if(node.left==null&&node.right==null) return null;
-		//case2 : 1child
-		else if(node.left==null&&node.right!=null)return node.right; // node.right !=null
-		else if (node.right==null&&node.left!=null)return node.left; //node.left !=null
-		//case3
-		else {
-			//successor or predecessor
-			Node s = node.right;
-			Node parent = node;
-			while(s.left!=null) {
-				parent =s;
-				s=s.left;
-			}
-		
-			//now, s means successor
-			node.key = s.key;
-			if(s==node.right)
-				node.right = s.right; //=>s is delete
-			else
-				parent.left = s.right;
-			return node;
-		}
-		// 숙제 프리디세서로 진행 석섹서 => 프리디세서
+	    // case1 : no child
+	    if (node.left == null && node.right == null) {
+	        return null;
+	    }
+	    // case2 : one child
+	    else if (node.left == null) {
+	        return node.right;
+	    }
+	    else if (node.right == null) {
+	        return node.left;
+	    }
+	    // case3 : two children —> predecessor 사용
+	    else {
+	        Node pred = node.left;
+	        Node parentOfPred = node;
+	        while (pred.right != null) {
+	            parentOfPred = pred;
+	            pred = pred.right;
+	        }
+
+	        node.key = pred.key;
+
+	        if (parentOfPred == node) {
+	            parentOfPred.left = pred.left;
+	        } else {
+	            parentOfPred.right = pred.left;
+	        }
+
+	        return node;
+	    }
 	}
 
 	public static void main(String[] args) {
 		int [] keys = {4,7,5,1,0,3,9,2,6,8};
 		
 
-		BinarySearchTree t = new BinarySearchTree();
+		BinarySearchTree2 t = new BinarySearchTree2();
 		
 		for (int i=0; i<keys.length;i++) {
 			t.insert(keys[i]);
