@@ -19,7 +19,7 @@ public class Perm {
 		for (int i = depth; i < data.length; i++) {
 			swap(depth, i);
 			perm(depth + 1);
-			swap(depth, i);
+			swap(i, depth);
 		}
 	}
 
@@ -30,7 +30,8 @@ public class Perm {
 	}
 
 	public static void main(String[] args) {
-		char[] data = { 'a', 'b', 'c', 'd', 'e' };
+//		char[] data = { 'a', 'b', 'c', 'd', 'e' };
+		char[] data = { 'a', 'b', 'c' };
 		Perm p = new Perm(data);
 		p.perm();
 	}
