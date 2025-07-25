@@ -1,25 +1,54 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.util.Queue;
-import java.util.StringTokenizer;
+import java.io.*;
+import java.util.*;
 
 public class Main {
+    static class Document {
+        int index; 
+        int priority;	  
 
-	public Queue<Integer> queue1;
-	public Queue<Integer> queue2;
+        Document(int index, int priority) {
+            this.index = index;
+            this.priority = priority;
+        }
+    }
 
-	public static void main(String[] args) throws NumberFormatException, IOException {
-		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		int n = Integer.parseInt(br.readLine());
-		for (int i = 0; i < n; i++) {
-			StringTokenizer st = new StringTokenizer(br.readLine());
-			int size = Integer.parseInt(st.nextToken());
-			int target = Integer.parseInt(st.nextToken());
-			for(int j=0;j<size;j++) {
-				
-			}
-		}
+    public static void main(String[] args) throws IOException {
+        BufferedReader br  = new BufferedReader(new InputStreamReader(System.in));
+        int T = Integer.parseInt(br.readLine());
 
-	}
+        while (T-- > 0) {
+            StringTokenizer st = new StringTokenizer(br.readLine());
+            int N = Integer.parseInt(st.nextToken());
+            int M = Integer.parseInt(st.nextToken()); 
+
+            st = new StringTokenizer(br.readLine());
+            Queue<Document> queue = new LinkedList<>();
+            List<Integer> priorities = new ArrayList<>();
+
+            for (int i = 0; i < N; i++) {
+                int p = Integer.parseInt(st.nextToken());
+                queue.add(new Document(i, p));
+                priorities.add(p);
+            }
+
+
+            priorities.sort(Collections.reverseOrder());
+
+            int count = 0;  
+            int priorityIndex = 0;  
+            while (!queue.isEmpty()) {
+                Document curr = queue.poll();
+                if (curr.priority == priorities.get(priorityIndex)) {
+                    count++;
+                    if (curr.index == M) {
+                        System.out.println(count);
+                        break;
+                    }
+                    priorityIndex++;
+                } else {
+                    queue.add(curr);  
+                }
+            }
+        }
+    }
 }
